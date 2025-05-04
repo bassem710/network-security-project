@@ -1,13 +1,7 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const {
-  SUPER_ADMIN,
-  ADMIN,
-  MANAGER,
-  LOGGED_IN_TOKEN,
-  REFRESH_TOKEN
-} = require("../utils/constants");
+const { SUPER_ADMIN, ADMIN, MANAGER } = require("../utils/constants");
 
 const adminSchema = mongoose.Schema(
   {
@@ -60,8 +54,7 @@ adminSchema.methods.generateToken = async function () {
   const token = jwt.sign(
     {
       userId: this._id,
-      role: this.role,
-      type: LOGGED_IN_TOKEN
+      role: this.role
     },
     process.env.JWT_SECRET,
     {
@@ -75,7 +68,7 @@ adminSchema.methods.generateToken = async function () {
 
   return {
     token,
-    tokenExpDate,
+    tokenExpDate
   };
 };
 

@@ -3,7 +3,6 @@ require("dotenv").config();
 const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
-const expressAsyncHandler = require("express-async-handler");
 
 const Admin = require("./models/admin.model");
 
@@ -49,7 +48,7 @@ mongoose
     }
   });
 
-// CORS
+// CORS for security
 app.use(cors());
 app.options("*", cors());
 
