@@ -1,0 +1,1222 @@
+{
+	"info": {
+		"_postman_id": "a80653a4-89fc-45e6-b6d4-8e70900aa87e",
+		"name": "Admin API",
+		"description": "API collection for the Admin management system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22779401",
+		"_collection_link": "https://www.postman.com/bassem-2022/workspace/bassem-said-bassem620/collection/22779401-a80653a4-89fc-45e6-b6d4-8e70900aa87e?action=share&source=collection_link&creator=22779401"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"token\", pm.response.json().token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    // \"email\": \"admin@gmail.com\",\n\t\t// \"email\": \"bassemsaeed620@gmail.com\",\n\t\t\"email\": \"bassemsaeed710@gmail.com\",\n    \"password\": \"test1234\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/admin/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"login"
+							]
+						},
+						"description": "Login as an admin user"
+					},
+					"response": [
+						{
+							"name": "Invalid credentials",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    // \"email\": \"admin@gmail.com\",\n\t\t// \"email\": \"bassemsaeed620@gmail.com\",\n\t\t\"email\": \"bassemsaeed710@gmail.com\",\n    \"password\": \"testw1234\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21-dBEoW0UmTF+EGUMaprEp9/8zNNA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 04 May 2025 01:17:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid credentials\"\n}"
+						},
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    // \"email\": \"admin@gmail.com\",\n\t\t// \"email\": \"bassemsaeed620@gmail.com\",\n\t\t\"email\": \"bassemsaeed710@gmail.com\",\n    \"password\": \"test1234\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/admin/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "392"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"188-FeSNJrRmy7oV2vip7MsphWjPKMI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 04 May 2025 01:15:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"{{vault:json-web-token}}\",\n    \"tokenExpDate\": \"2025-06-03T01:15:54.199Z\",\n    \"admin\": {\n        \"id\": \"6816bfbffc200c29e75f7f9b\",\n        \"fullName\": \"Bassem\",\n        \"email\": \"bassemsaeed710@gmail.com\",\n        \"role\": \"manager\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"logout"
+							]
+						},
+						"description": "Logout the current admin user"
+					},
+					"response": [
+						{
+							"name": "session expired",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/logout",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"logout"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"44-aBJiCL5p/rRF9pOE3wX4vJEp+zE\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 04 May 2025 01:16:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Session expired, please login again...\"\n}"
+						},
+						{
+							"name": "Logout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/logout",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "37"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"25-71uUsMgZY3FdZp9j1h5YMrBIOgg\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 04 May 2025 01:16:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Logged out successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Refresh Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.json().token) pm.collectionVariables.set(\"token\", pm.response.json().token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/refresh-token",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"refresh-token"
+							]
+						},
+						"description": "Refresh the authentication token"
+					},
+					"response": [
+						{
+							"name": "Refresh Token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/refresh-token",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"refresh-token"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "319"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"13f-zbHr6/psME70KLyUT8egqFZ0X+c\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 04 May 2025 01:16:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Token refreshed successfully\",\n    \"token\": \"{{vault:json-web-token}}\",\n    \"tokenExpDate\": \"2025-06-03T01:16:17.187Z\"\n}"
+						},
+						{
+							"name": "session expired",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/refresh-token",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"refresh-token"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"44-aBJiCL5p/rRF9pOE3wX4vJEp+zE\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 04 May 2025 01:16:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Session expired, please login again...\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Admin Management",
+			"item": [
+				{
+					"name": "Get All Admins",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin"
+							]
+						},
+						"description": "Get all admin users (requires Super Admin or Admin role)"
+					},
+					"response": [
+						{
+							"name": "Get All Admins",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "229"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"e5-UK/l8EmbE8/oKsRBZa0hUDnTbxY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 04 May 2025 01:13:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"_id\": \"6816bf06c74947661ffdff4a\",\n        \"fullName\": \"Bassem\",\n        \"email\": \"bassemsaeed620@gmail.com\",\n        \"role\": \"admin\",\n        \"isVerified\": false,\n        \"isBlocked\": false,\n        \"createdAt\": \"2025-05-04T01:12:38.632Z\",\n        \"updatedAt\": \"2025-05-04T01:12:38.632Z\",\n        \"__v\": 0\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Admin by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6816bf06c74947661ffdff4a"
+								}
+							]
+						},
+						"description": "Get a specific admin by ID (requires Super Admin or Admin role)"
+					},
+					"response": [
+						{
+							"name": "Get Admin by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "6816bf06c74947661ffdff4a"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "227"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"e3-N2pDfAu7lOeMKOBB0OQOk4iSkY4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 04 May 2025 01:12:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"6816bf06c74947661ffdff4a\",\n    \"fullName\": \"Bassem\",\n    \"email\": \"bassemsaeed620@gmail.com\",\n    \"role\": \"admin\",\n    \"isVerified\": false,\n    \"isBlocked\": false,\n    \"createdAt\": \"2025-05-04T01:12:38.632Z\",\n    \"updatedAt\": \"2025-05-04T01:12:38.632Z\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Create New Admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fullName\": \"Bassem\",\n    \"email\": \"bassemsaeed710@gmail.com\",\n    \"password\": \"test1234\",\n    \"role\": \"manager\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/admin",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin"
+							]
+						},
+						"description": "Create a new admin user (requires Super Admin role)"
+					},
+					"response": [
+						{
+							"name": "Create New Admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"fullName\": \"Bassem\",\n    \"email\": \"bassemsaeed620@gmail.com\",\n    \"password\": \"test1234\",\n    \"role\": \"admin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/admin",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "113"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"71-EDlgFewKfBkmjZk+7tqb3dWwrk4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 04 May 2025 01:12:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"admin\": {\n        \"id\": \"6816bf06c74947661ffdff4a\",\n        \"fullName\": \"Bassem\",\n        \"email\": \"bassemsaeed620@gmail.com\",\n        \"role\": \"admin\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Admin",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6816bf06c74947661ffdff4a"
+								}
+							]
+						},
+						"description": "Delete an admin user (requires Super Admin role)"
+					},
+					"response": [
+						{
+							"name": "Delete Admin",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "6816bf06c74947661ffdff4a"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b-FKpzN+4BD8nJk2iE1iAmZl7Y/HM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 04 May 2025 01:14:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Admin removed\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Role Management",
+			"item": [
+				{
+					"name": "Get Super Admins",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/role/super-admin",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"role",
+								"super-admin"
+							]
+						},
+						"description": "Get all super admin users (requires Super Admin role)"
+					},
+					"response": [
+						{
+							"name": "Get Super Admins",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/role/super-admin",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"role",
+										"super-admin"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-ebYKEsLzulIeAxxUzqNbv/Inwds\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 04 May 2025 01:14:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Super admins role fetched successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Admins",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/role/admin",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"role",
+								"admin"
+							]
+						},
+						"description": "Get all admin users (requires Admin role)"
+					},
+					"response": [
+						{
+							"name": "Not allowed",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/role/admin",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"role",
+										"admin"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "62"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3e-WrCG9m1PTEdsv/+WkxVHSAfst04\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 04 May 2025 01:14:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Not allowed to access this route\"\n}"
+						},
+						{
+							"name": "Get Admins",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/role/admin",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"role",
+										"admin"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2e-tV1590CBmJjPrIu8mueoNHIqBiE\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 04 May 2025 01:15:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Admins role fetched successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Managers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/admin/role/manager",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"role",
+								"manager"
+							]
+						},
+						"description": "Get all manager users (requires Manager role)"
+					},
+					"response": [
+						{
+							"name": "Get Managers",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/admin/role/manager",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"admin",
+										"role",
+										"manager"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "48"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"30-FbyZ9FYTPZKllA/pGICAvBUdUis\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 04 May 2025 01:16:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Managers role fetched successfully\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000"
+		},
+		{
+			"key": "token",
+			"value": "your-jwt-token-here"
+		}
+	]
+}
